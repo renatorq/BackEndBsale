@@ -27,8 +27,7 @@ public class Product {
     @Column(name="discount")
     private Long discount;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
+
     @Column(name="category")
     private Category category;
 
