@@ -1,5 +1,6 @@
 package com.bsale.bsale.services;
 
+import com.bsale.bsale.entity.Category;
 import com.bsale.bsale.entity.Product;
 
 import com.bsale.bsale.repository.ProductRepository;
@@ -18,8 +19,8 @@ public class ProductServiceImp implements IProductService{
     private ProductRepository productRepository;
 
     @Override
-    public Page<Product> listProductByCategory(Long category, Pageable pageable) {
-        return null;
+    public Page<Product> listProductByCategory(Category category, Pageable pageable) {
+        return productRepository.findByCategory(category,pageable);
     }
 
     @Override
@@ -29,6 +30,6 @@ public class ProductServiceImp implements IProductService{
 
     @Override
     public Page<Product> listProductByName(String name, Pageable pageable) {
-        return null;
+        return productRepository.findByNameContains(name,pageable);
     }
 }
