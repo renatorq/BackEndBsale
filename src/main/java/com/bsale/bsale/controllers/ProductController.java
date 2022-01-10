@@ -4,7 +4,9 @@ import com.bsale.bsale.entity.Product;
 import com.bsale.bsale.services.ProductServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,20 +24,25 @@ public class ProductController {
 
     @CrossOrigin(origins = "*",methods = {RequestMethod.GET})
     @GetMapping("/listAll")
-    public ResponseEntity<Page<Product>> listProduct (@PageableDefault(size=10,page=0) Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProduct(pageable));
+    public ResponseEntity<Page<Product>> listProduct (@RequestParam int page, int size ) {
+
+        Pageable sortedByName =  PageRequest.of(page, size, Sort.by("name"));
+
+        return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProduct(sortedByName));
     }
 
     @CrossOrigin(origins = "*",methods = {RequestMethod.GET})
     @GetMapping(value = "/listByCategory/{idCategory}")
-    public ResponseEntity<Page<Product>> listProductByCategory (@PathVariable Long idCategory, @PageableDefault(size=10,page=0) Pageable pageable){
-        return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProductByCategory(idCategory, pageable));
+    public ResponseEntity<Page<Product>> listProductByCategory (@PathVariable Long idCategory, @RequestParam int page, int size ){
+        Pageable sortedByName = PageRequest.of(page, size, Sort.by("name"));
+        return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProductByCategory(idCategory, sortedByName));
     }
 
     @CrossOrigin(origins = "*",methods = {RequestMethod.GET})
     @GetMapping("/listByName")
-    public ResponseEntity<Page<Product>> listProductByName(@RequestParam String name,@PageableDefault(size=10,page=0) Pageable pageable){
-        return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProductByName(name,pageable));
+    public ResponseEntity<Page<Product>> listProductByName(@RequestParam String name,int page, int size){
+        Pageable sortedByName =PageRequest.of(page, size, Sort.by("name"));
+        return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProductByName(name,sortedByName));
     }
 
 }
