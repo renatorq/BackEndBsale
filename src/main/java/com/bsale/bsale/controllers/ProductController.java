@@ -27,7 +27,7 @@ public class ProductController {
     }
 
     @CrossOrigin(origins = "*",methods = {RequestMethod.GET})
-    @GetMapping("/listByCategory/{id}")
+    @GetMapping(value = "/listByCategory/{idCategory}")
     public ResponseEntity<Page<Product>> listProductByCategory (@PathVariable Long idCategory, @PageableDefault(size=10,page=0) Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProductByCategory(idCategory, pageable));
     }
