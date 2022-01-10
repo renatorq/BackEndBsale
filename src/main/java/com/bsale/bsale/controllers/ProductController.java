@@ -18,16 +18,19 @@ public class ProductController {
     @Autowired
     ProductServiceImp productServiceImp;
 
+    @CrossOrigin(origins = "*",methods = {RequestMethod.GET})
     @GetMapping("/listAll")
     public ResponseEntity<Page<Product>> listProduct (@PageableDefault(size=10,page=0) Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProduct(pageable));
     }
 
+    @CrossOrigin(origins = "*",methods = {RequestMethod.GET})
     @GetMapping("/listByCategory")
     public ResponseEntity<Page<Product>> listProductByCategory (@RequestBody Category category, @PageableDefault(size=10,page=0) Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProductByCategory(category, pageable));
     }
 
+    @CrossOrigin(origins = "*",methods = {RequestMethod.GET})
     @GetMapping("/listByName")
     public ResponseEntity<Page<Product>> listProductByName(@RequestParam String name,@PageableDefault(size=10,page=0) Pageable pageable){
         return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProductByName(name,pageable));
