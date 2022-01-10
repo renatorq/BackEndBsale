@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface IProductService {
 
-    public Page<Product> listProductByCategory (Category category, Pageable pageable);
+    public Page<Product> listProductByCategory (Long idCategory, Pageable pageable);
 
     public Page<Product> listProduct (Pageable pageable);
 

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 
 @RestController
 @RequestMapping(value = "/product")
@@ -25,9 +27,9 @@ public class ProductController {
     }
 
     @CrossOrigin(origins = "*",methods = {RequestMethod.GET})
-    @GetMapping("/listByCategory")
-    public ResponseEntity<Page<Product>> listProductByCategory (@RequestBody Category category, @PageableDefault(size=10,page=0) Pageable pageable){
-        return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProductByCategory(category, pageable));
+    @GetMapping("/listByCategory/{id}")
+    public ResponseEntity<Page<Product>> listProductByCategory (@PathVariable Long idCategory, @PageableDefault(size=10,page=0) Pageable pageable){
+        return ResponseEntity.status(HttpStatus.OK).body(productServiceImp.listProductByCategory(idCategory, pageable));
     }
 
     @CrossOrigin(origins = "*",methods = {RequestMethod.GET})

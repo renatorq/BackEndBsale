@@ -19,7 +19,9 @@ public class ProductServiceImp implements IProductService{
     private ProductRepository productRepository;
 
     @Override
-    public Page<Product> listProductByCategory(Category category, Pageable pageable) {
+    public Page<Product> listProductByCategory(Long idCategory, Pageable pageable) {
+        Category category = new Category();
+        category.setId(idCategory);
         return productRepository.findByCategory(category,pageable);
     }
 
