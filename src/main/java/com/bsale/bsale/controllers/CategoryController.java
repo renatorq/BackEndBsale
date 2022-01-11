@@ -8,12 +8,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*
+    Clase que especifica los diferentes endpoint de categoria que se pueden consumir
+ */
+
 @RestController
-@RequestMapping(value = "/category")
+/*end point raiz de categoria*/
+@RequestMapping(value = "/category/v1")
 public class CategoryController {
 
     @Autowired
     private CategoryServiceImp categoryServiceImp;
+
+    /*
+    Metodo que ejecuta al llamar al endpoint "/list", que devuelve una lista de categorias
+     */
 
     @CrossOrigin(origins = "*",methods = {RequestMethod.GET})
     @GetMapping("/list")
